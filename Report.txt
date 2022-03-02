@@ -1,0 +1,16 @@
+Projekt Clasification artefacts in iEEG data
+@BcJanŠíma
+- Natrénovaný model Petra Nejedlého  -  Medel_Noise_IEEG.ONNX
+- Nevyzkoušený na datech
+- vstupní data ve formátu tensor
+- problém s knihovnou tensorflow
+- instrukce od Petra: 
+	_,_, data = signal.spectrogram(data[0,:],fs=5000,nperseg=256,noverlap=128,nfft=1024)
+
+	tensor_data = torch.from_numpy(data_numpy)
+
+	a potom musíš pohlídat dimenze toho tenzoru. Tj pro jeden úsek to bude
+	tensor_data = tensor_data.view(1,1,Sy,Sx) kde Sy,Sx jsou dimenze spektrogramu
+
+	pro N úseků najednou by to bylo tensor_data = tensor_data.view(N,1,Sy,Sx)
+
